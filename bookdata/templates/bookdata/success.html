@@ -1,0 +1,11 @@
+{% extends "users/base.html"%}
+{% block content %}
+{% load static %}
+<div class="text-center">
+    <h3>You successfully added a new book(s)</h3>
+    <a href="{% url 'index' %}">Go Back Home</a><br>
+    <a href="{% url 'search' %}">New Search</a><br>
+</div>
+
+
+{% endblock content %}

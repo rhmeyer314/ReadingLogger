@@ -1,0 +1,19 @@
+{% extends "users/base.html"%}
+{% block content %}
+{% load static %}
+<div class="text-center">
+    <h1>All of your books!</h1><br>
+
+    {% for info in book_info %}
+    <p><strong>Title: </strong>{{ info.book_title }}</p>
+    <p><strong>Authors: </strong>
+        {% for authors in info.authors %}
+        {{ authors }},
+        {% endfor %}
+    </p>
+    <p><strong>Page Count: </strong>{{ info.page_count }}</p>
+    <br>
+
+    {% endfor %}
+</div>
+{% endblock content %}

@@ -1,0 +1,47 @@
+{% extends "users/base.html"%}
+{% block content %}
+{% load static %}
+
+<div class="container">
+    <h3 style="padding-top: 20px;">Search for a book</h3>
+    <input style="margin-bottom: 30px;" id="search" placeholder="Title or Author">
+    <button id="button" type="button">Search</button>
+    <form action="{% url 'get_values' %}" method="post">
+        {% csrf_token %}
+        <div id="results"></div>
+        <input style="margin-bottom: 20px;" id="submit" type="submit">
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        function bookSearch() {
+            var search = document.getElementById('search').value
+            var checkbox;
+            document.getElementById('results').innerHTML = ""
+            console.log(search)
+
+            $.ajax({
+                url: "https://www.googleapis.com/books/v1/volumes?q=" + search + "&maxResults=20",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    for (i = 0; i < data.items.length; i++) {
+                        var authors = data.items[i].volumeInfo.authors;
+
+                        results.innerHTML += "<input style='width: 20px; height: 20px;' type='checkbox' name='bookid' value='" +
+                            data.items[i].id + "'>" + "<img style='margin-bottom: 20px;' src='" + data.items[i].volumeInfo.imageLinks.smallThumbnail + "'>"
+                            + " Title: " + data.items[i].volumeInfo.title + ", By: " + authors + "<br>";
+
+                    }
+                },
+
+                type: "GET"
+            });
+        }
+
+
+
+
+        document.getElementById('button').addEventListener('click', bookSearch, false)
+    </script>
+</div>
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends "users/base.html"%}
+{% block content %}
+{% load static %}
+
+<div class="text-center">
+    <h1>Welcome to ReadingLogger!</h1><br>
+
+    <h2>Your {{ year }} Book Stats</h2><br>
+    <h4>Number of books read this year: {{ year_book_count }}</h4><br>
+    <h4>Pages read this year: {{ year_page_count }}</h4><br>
+    <h4>Number of unique authors from this year: {{ year_unique_authors }}</h4><br>
+    <h4>Number of books read this month: {{ month_book_count }}</h4><br>
+    <h4>Pages read this month: {{ month_page_count }}</h4><br>
+    <h4>Number of unique authors from this month: {{ month_unique_authors }}</h4><br>
+</div>
+
+
+{% endblock content %}
