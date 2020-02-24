@@ -4,5 +4,5 @@ Web app built with Django and the Google Books API. Allows users to search for b
 # What I learned
 * Django Framework and its structure
 * Integration of PostgreSQL in web app
-* Improved Python skills
-* Using get and post requests
+* Communication between client-side and server-side
+* Filtering data from an API
