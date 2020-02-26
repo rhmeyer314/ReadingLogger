@@ -15,7 +15,6 @@
     <script type="text/javascript">
         function bookSearch() {
             var search = document.getElementById('search').value
-            var checkbox;
             document.getElementById('results').innerHTML = ""
             console.log(search)
 
@@ -37,9 +36,6 @@
                 type: "GET"
             });
         }
-
-
-
 
         document.getElementById('button').addEventListener('click', bookSearch, false)
     </script>

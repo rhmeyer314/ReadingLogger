@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-
+# all possible routes. Stem from ReadingLogger.urls.py file
 urlpatterns = [
     path('get_value/', views.get_values, name='get_values'),
     path('search/', views.search, name='search'),

@@ -5,16 +5,15 @@ import requests
 from datetime import datetime
 from .data import Data
 
-
-
-
+# Loads search page. If user is not logged in, redirects to login page
 def search(request):
     if (request.user.is_authenticated):
         return render(request, 'bookdata/search.html')
     else:
         return redirect('login')
 
-
+# Loads index page with variables including year_book_count, year_page_count, year_unique_authors, month_book_count,
+# month_page_count, month_unique_authors and year. If user is not logged in, redirects to login page
 def index(request):
     year = datetime.today().year
     data = Data()
@@ -40,7 +39,7 @@ def index(request):
     else:
         return redirect('login')
 
-
+# posts books to database and redirects to success page
 def get_values(request):
     book_ids = request.POST.getlist('bookid')
     today = datetime.today()
@@ -64,14 +63,14 @@ def get_values(request):
         selected.save()
     return redirect('success')
 
-
+# loads success page
 def success(request):
     if (request.user.is_authenticated):
         return render(request, 'bookdata/success.html')
     else:
         return redirect('login')
 
-
+# loads all books a user has read
 def users_books(request):
     username = request.user.username
     data = Data()

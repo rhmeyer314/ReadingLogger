@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 
+# Model for Users selected books they have read
 class UserSelectedBookID(models.Model):
     username = models.CharField(max_length=20)
     book_id = models.CharField(max_length=30)

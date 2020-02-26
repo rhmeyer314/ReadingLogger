@@ -5,15 +5,12 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-
+# Custom UserManage Class
 class UserManager(BaseUserManager):
     def create_user(
             self, username, email, first_name, last_name, password=None,
             commit=True):
-        """
-        Creates and saves a User with the given email, first name, last name
-        and password.
-        """
+
         if not email:
             raise ValueError(_('Users must have a username'))
         if not email:
@@ -36,10 +33,7 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, username, email, first_name, last_name, password):
-        """
-        Creates and saves a superuser with the given email, first name,
-        last name and password.
-        """
+
         user = self.create_user(
             username,
             email,
@@ -52,7 +46,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-
+# Custom User Model where username is primary key
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=20, primary_key=True)
     email = models.EmailField(
@@ -92,21 +86,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
 
     def get_full_name(self):
-        """
-        Return the first_name plus the last_name, with a space in between.
-        """
-        # full_name = '%s %s' % (self.first_name, self.last_name)
-        # return full_name.strip()
+
+        full_name = '%s %s' % (self.first_name, self.last_name)
+        return full_name.strip()
 
     def __str__(self):
         return '{} <{}>'.format(self.get_full_name(), self.email)
 
     def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
-        # Simplest possible answer: Yes, always
         return True
 
     def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
-        # Simplest possible answer: Yes, always
         return True
